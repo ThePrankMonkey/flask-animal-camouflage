@@ -32,9 +32,15 @@ def index():
         print(f"There are {len(session['animals'])} animals in the session")
         animal = json.loads(session.get("animals").pop())
         session["last_type"] = animal["animal_type"]
+        session["count"] += 1
         session.modified = True
         print(f"Working on {animal['name']} with path {animal['filepath']}")
-        return render_template("index.html", animal=animal)
+        template_vars = {
+            "animal": animal,
+            "count": session["count"],
+            "total": session["total"],
+        }
+        return render_template("index.html", **template_vars)
     elif session.get("camo_times"):
         print("Game is over")
         # get average times
@@ -45,8 +51,7 @@ def index():
         expose_average = sum(expose_times) / len(expose_times)
         expose_average = round(expose_average, 2)
         # reset average times
-        session["camo_times"] = []
-        session["expose_times"] = []
+        session["camo_times"] = False
         return render_template(
             "index.html", camo_average=camo_average, expose_average=expose_average
         )
@@ -59,15 +64,20 @@ def index():
         shuffled_animals = camo[:CAMO_COUNT] + expose[:EXPOSE_COUNT]
         random.shuffle(shuffled_animals)
         animal = shuffled_animals.pop()
-        template_vars = {
-            "animal": animal,
-        }
+
         session["animals"] = [a.json() for a in shuffled_animals]
         session["camo_times"] = []
         session["expose_times"] = []
         session["last_type"] = animal.animal_type
         session["timestamp"] = time.time()
+        session["total"] = len(shuffled_animals) + 1
+        session["count"] = 1
         session.modified = True
+        template_vars = {
+            "animal": animal,
+            "count": session["count"],
+            "total": session["total"],
+        }
         print(f"Session has {len(session['animals'])} more animals")
         return render_template("index.html", **template_vars)
 

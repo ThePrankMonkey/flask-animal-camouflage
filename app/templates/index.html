@@ -17,6 +17,9 @@
         <div class="display-5">
             Try to find the {{ animal.name }}
         </div>
+        <div class="display-6">
+            You are on animal {{ count }} of {{ total }}
+        </div>
         <img src="{{ url_for('static', filename=animal.filepath) }}" onClick="window.location.reload();"/>
         {% endif %}
     </div>
