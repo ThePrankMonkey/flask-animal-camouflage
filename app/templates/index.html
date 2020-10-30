@@ -2,9 +2,22 @@
 
 {% block content %}
     <div class="container">
-        <div class="display-2">
+        <div class="display-3">
             Can you find the hidden Animals?
         </div>
-        <img src="{{ url_for('static', filename=selected_animals[0].filepath) }}" />
+        {% if camo_average %}
+        To find the camouflaged animals, it took you an average of {{ camo_average }} seconds.
+        <br>
+        To find the exposed animals, it took you an average of {{ expose_average }} seconds.
+        <br>
+        <input type="button" value="Play again?" onClick="window.location.reload();"/>
+        {% endif %}
+
+        {% if animal %}
+        <div class="display-5">
+            Try to find the {{ animal.name }}
+        </div>
+        <img src="{{ url_for('static', filename=animal.filepath) }}" onClick="window.location.reload();"/>
+        {% endif %}
     </div>
 {% endblock %}
