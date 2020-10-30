@@ -6,7 +6,7 @@ import os
 import random
 import time
 
-from animals import camo, expose
+from .animals import camo, expose
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET") or "some-dummy-string-for-testing"
