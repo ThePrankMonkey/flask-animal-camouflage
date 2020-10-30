@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="display-2">
+            Can you find the hidden Animals?
+        </div>
+        <img src="{{ url_for('static', filename=selected_animals[0].filepath) }}" />
+    </div>
+{% endblock %}
