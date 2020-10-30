@@ -7,10 +7,11 @@ Students will have a random selection of camouflaged and revealed animals. They 
 
 - ~~Create session to track game.~~
 - ~~Build game~~
-- Get more expose images.
-- Resize expose images.
+- Get more expose images
+- ~~Resize expose images~~
   - https://stackoverflow.com/questions/273946/how-do-i-resize-an-image-using-pil-and-maintain-its-aspect-ratio
 - Try to find credit for camo images.
+- Add feature to check if student clicks on the right spot.
 
 ## References
 
